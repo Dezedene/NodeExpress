@@ -9,9 +9,7 @@ app.use(express.json())
 const mongoPassword = process.env.MONGO_PASSWORD
 const mongoose = require('mongoose');
 
-mongoose.connect(`mongodb+srv://dezedene:${mongoPassword}@cluster0.3p0leyv.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0`,
-  { useNewUrlParser: true,
-    useUnifiedTopology: true })
+mongoose.connect(`mongodb+srv://dezedene:${mongoPassword}@cluster0.3p0leyv.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0`)
   .then(() => console.log('Connexion à MongoDB réussie !'))
   .catch(() => console.log('Connexion à MongoDB échouée !'));
 

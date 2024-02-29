@@ -1,9 +1,20 @@
-const express = require('express')
+require('dotenv').config();
 
+const express = require('express')
 const app = express()
 
 // intercepte les requests qui contiennent du json et nous mettent à dispo ce contenu sur l'object request dans req.body
 app.use(express.json())
+
+const mongoPassword = process.env.MONGO_PASSWORD
+const mongoose = require('mongoose');
+
+mongoose.connect(`mongodb+srv://dezedene:${mongoPassword}@cluster0.3p0leyv.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0`,
+  { useNewUrlParser: true,
+    useUnifiedTopology: true })
+  .then(() => console.log('Connexion à MongoDB réussie !'))
+  .catch(() => console.log('Connexion à MongoDB échouée !'));
+
 
 // CRUD signifie "Create Read Update Delete"
 // CORS signifie « Cross Origin Resource Sharing »
@@ -32,6 +43,13 @@ app.post('/api/stuff', (req, res, next) => {
         message: 'objet créé !'
     })
 })
+
+// app.use((req, res, next) => {
+//     res.status(200).json({
+//         message:'hello there'
+//     })
+//     next()
+// })
 
 app.get('/api/stuff', (req, res, next) => {
     const stuff = [

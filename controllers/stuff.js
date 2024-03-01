@@ -1,5 +1,8 @@
 const Thing = require('../models/Thing')
 
+// Le fichier contrôleur exporte des méthodes qui sont ensuite attribuées aux routes pour améliorer
+// la maintenabilité de l'application.
+
 exports.createThing = (req, res, next) => {
     delete req.body._id
     const thing = new Thing({

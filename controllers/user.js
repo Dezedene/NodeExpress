@@ -2,7 +2,7 @@ const bcrypt = require('bcrypt')
 
 const User = require('../models/user')
 
-
+// on hash 10 fois le mdp du user
 exports.signup = (req, res, next) => {
     bcrypt.hash(req.body.password, 10)
     .then(hash => {

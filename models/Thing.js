@@ -1,6 +1,5 @@
 const mongoose = require('mongoose');
 
-
 // La méthode Schema permet de créer un schéma de données pour BDD MongoDB.
 // La méthode model transforme ce modèle en un modèle utilisable.
 const thingSchema = mongoose.Schema({

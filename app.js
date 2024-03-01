@@ -15,20 +15,14 @@ mongoose.connect(`mongodb+srv://dezedene:${mongoPassword}@cluster0.3p0leyv.mongo
   .catch(() => console.log('Connexion à MongoDB échouée !'));
 
 
-// CRUD signifie "Create Read Update Delete"
-// CORS signifie « Cross Origin Resource Sharing »
+// CRUD = "Create Read Update Delete"
+// CORS = « Cross Origin Resource Sharing », définit comment les serveurs et les navigateurs interagissent
+// app.use() permet d'attribuer un middleware à une route spécifique de l'appli, requêtes AJAX interdites par défaut
 
-// Pour permettre des requêtes cross-origin (et empêcher des erreurs CORS), des headers spécifiques de contrôle d'accès doivent être
-// de contrôle d'accès doivent être précisés pour tous vos objets de réponse.
-
-// Accéder à notre API depuis n'importe quelle origine ( '*' )
-// Ajouter les headers mentionnés aux requêtes envoyées vers notre API (Origin , X-Requested-With , etc.)
-// Envoyer des requêtes avec les méthodes mentionnées ( GET ,POST , etc.)
-
-// Le CORS définit comment les serveurs et les navigateurs interagissent
-// app.use() vous permet d'attribuer un middleware à une route spécifique de votre application.
-// par défaut, les requêtes AJAX sont interdites.
-
+// Headers pour permettre les request cross origin et empecher les erreurs CORS:
+// - Accéder à notre API depuis n'importe quelle origine ( '*' )
+// - Ajouter les headers mentionnés aux requêtes envoyées vers notre API (Origin , X-Requested-With , etc.)
+// - Envoyer des requêtes avec les méthodes mentionnées ( GET ,POST , etc.)
 app.use((req, res, next) => {
     res.setHeader('Access-Control-Allow-Origin', '*');
     res.setHeader('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content, Accept, Content-Type, Authorization');

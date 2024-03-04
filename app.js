@@ -1,21 +1,22 @@
-const express = require('express')
-const mongoose = require('mongoose');
-const app = express()
+const express = require("express");
+const mongoose = require("mongoose");
+const app = express();
 
-const stuffRoutes = require('./routes/stuff')
-const userRoutes = require('./routes/user')
+const stuffRoutes = require("./routes/stuff");
+const userRoutes = require("./routes/user");
 
-require('dotenv').config();
+require("dotenv").config();
 
-const mongoPassword = process.env.MONGO_PASSWORD
-mongoose.connect(`mongodb+srv://dezedene:${mongoPassword}@cluster0.3p0leyv.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0`)
-  .then(() => console.log('Connexion à MongoDB réussie !'))
-  .catch(() => console.log('Connexion à MongoDB échouée !'));
+const mongoPassword = process.env.MONGO_PASSWORD;
+mongoose
+  .connect(
+    `mongodb+srv://dezedene:${mongoPassword}@cluster0.3p0leyv.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0`
+  )
+  .then(() => console.log("Connexion à MongoDB réussie !"))
+  .catch(() => console.log("Connexion à MongoDB échouée !"));
 
 // intercepte les requests qui contiennent du json et nous mettent à dispo ce contenu sur l'object request dans req.body
-app.use(express.json())
-
-
+app.use(express.json());
 
 // CRUD = "Create Read Update Delete"
 // CORS = « Cross Origin Resource Sharing », définit comment les serveurs et les navigateurs interagissent
@@ -26,13 +27,19 @@ app.use(express.json())
 // - Ajouter les headers mentionnés aux requêtes envoyées vers notre API (Origin , X-Requested-With , etc.)
 // - Envoyer des requêtes avec les méthodes mentionnées ( GET ,POST , etc.)
 app.use((req, res, next) => {
-  res.setHeader('Access-Control-Allow-Origin', '*');
-  res.setHeader('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content, Accept, Content-Type, Authorization');
-  res.setHeader('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE, PATCH, OPTIONS');
+  res.setHeader("Access-Control-Allow-Origin", "*");
+  res.setHeader(
+    "Access-Control-Allow-Headers",
+    "Origin, X-Requested-With, Content, Accept, Content-Type, Authorization"
+  );
+  res.setHeader(
+    "Access-Control-Allow-Methods",
+    "GET, POST, PUT, DELETE, PATCH, OPTIONS"
+  );
   next();
 });
 
-app.use('/api/stuff', stuffRoutes)
-app.use('/api/auth', userRoutes)
+app.use("/api/stuff", stuffRoutes);
+app.use("/api/auth", userRoutes);
 
-module.exports = app
+module.exports = app;
